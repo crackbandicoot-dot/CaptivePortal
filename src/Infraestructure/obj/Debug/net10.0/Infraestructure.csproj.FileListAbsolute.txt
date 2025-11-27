@@ -1,0 +1,16 @@
+C:\OSShared\CaptivePortal\src\Infraestructure\bin\Debug\net10.0\Infraestructure.deps.json
+C:\OSShared\CaptivePortal\src\Infraestructure\bin\Debug\net10.0\Infraestructure.dll
+C:\OSShared\CaptivePortal\src\Infraestructure\bin\Debug\net10.0\Infraestructure.pdb
+C:\OSShared\CaptivePortal\src\Infraestructure\bin\Debug\net10.0\Core.dll
+C:\OSShared\CaptivePortal\src\Infraestructure\bin\Debug\net10.0\Core.pdb
+C:\OSShared\CaptivePortal\src\Infraestructure\obj\Debug\net10.0\Infraestructure.csproj.AssemblyReference.cache
+C:\OSShared\CaptivePortal\src\Infraestructure\obj\Debug\net10.0\Infraestructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\OSShared\CaptivePortal\src\Infraestructure\obj\Debug\net10.0\Infraestructure.AssemblyInfoInputs.cache
+C:\OSShared\CaptivePortal\src\Infraestructure\obj\Debug\net10.0\Infraestructure.AssemblyInfo.cs
+C:\OSShared\CaptivePortal\src\Infraestructure\obj\Debug\net10.0\Infraestructure.csproj.CoreCompileInputs.cache
+C:\OSShared\CaptivePortal\src\Infraestructure\obj\Debug\net10.0\Infraestructure.sourcelink.json
+C:\OSShared\CaptivePortal\src\Infraestructure\obj\Debug\net10.0\Infraest.B0D41582.Up2Date
+C:\OSShared\CaptivePortal\src\Infraestructure\obj\Debug\net10.0\Infraestructure.dll
+C:\OSShared\CaptivePortal\src\Infraestructure\obj\Debug\net10.0\refint\Infraestructure.dll
+C:\OSShared\CaptivePortal\src\Infraestructure\obj\Debug\net10.0\Infraestructure.pdb
+C:\OSShared\CaptivePortal\src\Infraestructure\obj\Debug\net10.0\ref\Infraestructure.dll
