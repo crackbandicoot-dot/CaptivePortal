@@ -1,6 +1,6 @@
 <Solution>
-  <Project Path="../tests/TestProject/TestProject.csproj" />
   <Project Path="Core/Core.csproj" />
   <Project Path="Infraestructure/Infraestructure.csproj" />
   <Project Path="ServerCLI/ServerCLI.csproj" />
+  <Project Path="TestProject/TestProject.csproj"/>
 </Solution>

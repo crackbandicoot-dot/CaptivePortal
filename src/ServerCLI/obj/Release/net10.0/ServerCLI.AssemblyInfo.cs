@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ServerCLI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8aefd92cd0632b9faa717fb26ac5522d58cb6670")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b96aeecb661b9d2204afd96773acfadc518992d")]
 [assembly: System.Reflection.AssemblyProductAttribute("ServerCLI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ServerCLI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
