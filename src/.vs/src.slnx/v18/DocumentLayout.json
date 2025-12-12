@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\OSShared\\CaptivePortal\\src\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{5ED06CAD-956C-C94D-BC0C-E89E30A887C2}|Core\\Core.csproj|c:\\osshared\\captiveportal\\src\\core\\pages\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5ED06CAD-956C-C94D-BC0C-E89E30A887C2}|Core\\Core.csproj|solutionrelative:core\\pages\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7E010D01-B1A9-10A2-00A1-75E0A31B8515}|ServerCLI\\ServerCLI.csproj|c:\\osshared\\captiveportal\\src\\servercli\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E010D01-B1A9-10A2-00A1-75E0A31B8515}|ServerCLI\\ServerCLI.csproj|solutionrelative:servercli\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -14,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -33,14 +37,31 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\OSShared\\CaptivePortal\\src\\Core\\Pages\\index.html",
+              "RelativeDocumentMoniker": "Core\\Pages\\index.html",
+              "ToolTip": "C:\\OSShared\\CaptivePortal\\src\\Core\\Pages\\index.html",
+              "RelativeToolTip": "Core\\Pages\\index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-12-12T05:16:41.777Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\OSShared\\CaptivePortal\\src\\ServerCLI\\Program.cs",
               "RelativeDocumentMoniker": "ServerCLI\\Program.cs",
               "ToolTip": "C:\\OSShared\\CaptivePortal\\src\\ServerCLI\\Program.cs",
               "RelativeToolTip": "ServerCLI\\Program.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAYAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAAAoAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-06T07:15:05.941Z",
               "EditorCaption": ""

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+IPD/OeLvMk=",
+  "dgSpecHash": "KED28abIP5Y=",
   "success": true,
   "projectFilePath": "C:\\OSShared\\CaptivePortal\\src\\TestProject\\TestProject.csproj",
   "expectedPackageFiles": [
@@ -20,5 +20,15 @@
     "C:\\Users\\PC\\.nuget\\packages\\mstest.testframework\\4.0.1\\mstest.testframework.4.0.1.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
+      "projectPath": "C:\\OSShared\\CaptivePortal\\src\\TestProject\\TestProject.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\OSShared\\CaptivePortal\\src\\TestProject\\TestProject.csproj",
+      "targetGraphs": []
+    }
+  ]
 }

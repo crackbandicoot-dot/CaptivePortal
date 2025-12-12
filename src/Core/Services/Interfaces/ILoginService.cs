@@ -7,5 +7,6 @@ namespace Core.Services.Interfaces
     public interface ILoginService
     {
         public Task LoginAsync(string username, string password,string ip);    
+        public Task LogoutAsync (string ip);
     }
 }

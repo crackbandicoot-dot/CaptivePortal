@@ -28,6 +28,10 @@ namespace Core.Services.Implementations
                 throw new Exception("Invalid username or password");
             }
         }
-        
+
+        public async Task LogoutAsync(string ip)
+        {
+           await internetAllower.BlockTraffic(ip);
+        }
     }
 }

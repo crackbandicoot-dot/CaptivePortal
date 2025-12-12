@@ -50,16 +50,7 @@ namespace Core
                         styleStr
                         );
                 }
-                if(httpRequest.Method=="GET" && httpRequest.Uri=="/succes.html")
-                {
-                    string succesHtmlStr = await File.ReadAllTextAsync(Path.Combine(pagesDirectory, "succes.html"));
-                    return new HttpResponse(
-                        200,"OK",
-                        new() { { "Content-Type", "text/html" }},
-                        succesHtmlStr
-                        );
-
-                }
+                
                 if (httpRequest.Method == "POST" && httpRequest.Uri == "/login")
                 {
 
@@ -84,7 +75,16 @@ namespace Core
                         }
                     }                    
                 }
-                throw new NotImplementedException();
+                if(httpRequest.Method=="POST" &&httpRequest.Uri=="/logout")
+                {
+
+                    await loginService.LogoutAsync(request.IP);
+                    return new HttpResponse(
+                            200, "OK",
+                            new(),
+                            "{}"
+                            ); ;
+                }
             }
             catch(Exception e)
             {

@@ -8,7 +8,6 @@ internal class Program
 {
     private static async Task Main(string[] args)
     {
-        
         //Instanciate services
         IUserRepository userRepository = new UserMockingRepository();
         IInternetAccesController internetAccesController = new InternetAccesControllerMock();
@@ -17,20 +16,16 @@ internal class Program
         string action = args[0];
         try
         {
-        if (action == "--start")
-        {
-            Console.WriteLine("Starting server");
-            await server.StartAsync();
-        }
-        else if(action=="--stop")
-        {
-            Console.WriteLine("Stopping server");
-            server.Stop();
-        }
+            if (action == "--start")
+            {
+                Console.WriteLine("Starting server...");
+                await server.StartAsync();
+                Console.WriteLine("Server started");
+            }
         }
         catch
         {
-            throw new Exception("Invalid command");
+            Console.WriteLine($"Unkwon argument{action}");
         }
         
     }
