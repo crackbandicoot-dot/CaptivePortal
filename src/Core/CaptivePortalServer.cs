@@ -83,8 +83,9 @@ namespace Core
                             200, "OK",
                             new(),
                             "{}"
-                            ); ;
+                            ); 
                 }
+                throw new Exception("Invalid enpoint");
             }
             catch(Exception e)
             {

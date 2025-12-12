@@ -4,12 +4,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form id="loginForm">
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <button type="submit">Login</button>
-        <div id="message" style="color: red; display: none;"></div>
-    </form>
+    <div class="container">
+        <h2 class="portal-label">Captive Portal</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button type="submit">Login</button>
+            <button type="button" id="logoutBtn" class="logout-btn">Logout</button>
+            <div id="message" style="color: red; display: none;"></div>
+        </form>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

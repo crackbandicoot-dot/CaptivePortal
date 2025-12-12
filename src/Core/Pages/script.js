@@ -24,7 +24,28 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         }
         
     } catch (error) {
-    messageDiv.textContent = `Some error has ocurred`;
+        messageDiv.textContent = `Some error has ocurred`;
+        messageDiv.style.display = 'block';
+    }
+});
+
+document.getElementById('logoutBtn').addEventListener('click', async function() {
+    const messageDiv = document.getElementById('message');
+    try {
+        const response = await fetch('http://captiveportal.cu:8000/logout', {
+            method: 'POST',
+            credentials: 'include'
+        });
+        if (response.ok) {
+            messageDiv.textContent = 'Logged out!';
+            messageDiv.style.color = 'green';
+        } else {
+            messageDiv.textContent = 'Logout failed';
+            messageDiv.style.color = 'red';
+        }
+    } catch (error) {
+        messageDiv.textContent = 'Error during logout';
+        messageDiv.style.color = 'red';
+    }
     messageDiv.style.display = 'block';
-}
 });

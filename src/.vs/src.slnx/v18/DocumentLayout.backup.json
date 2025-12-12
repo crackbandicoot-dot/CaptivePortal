@@ -3,16 +3,8 @@
   "WorkspaceRootPath": "C:\\OSShared\\CaptivePortal\\src\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5ED06CAD-956C-C94D-BC0C-E89E30A887C2}|Core\\Core.csproj|c:\\osshared\\captiveportal\\src\\core\\pages\\script.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{5ED06CAD-956C-C94D-BC0C-E89E30A887C2}|Core\\Core.csproj|solutionrelative:core\\pages\\script.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5ED06CAD-956C-C94D-BC0C-E89E30A887C2}|Core\\Core.csproj|c:\\osshared\\captiveportal\\src\\core\\captiveportalserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5ED06CAD-956C-C94D-BC0C-E89E30A887C2}|Core\\Core.csproj|solutionrelative:core\\captiveportalserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ABA3F542-59E7-CDD3-52A7-C71F658301AE}|Infraestructure\\Infraestructure.csproj|c:\\osshared\\captiveportal\\src\\infraestructure\\usermockingrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ABA3F542-59E7-CDD3-52A7-C71F658301AE}|Infraestructure\\Infraestructure.csproj|solutionrelative:infraestructure\\usermockingrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5ED06CAD-956C-C94D-BC0C-E89E30A887C2}|Core\\Core.csproj|c:\\osshared\\captiveportal\\src\\core\\pages\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5ED06CAD-956C-C94D-BC0C-E89E30A887C2}|Core\\Core.csproj|solutionrelative:core\\pages\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7E010D01-B1A9-10A2-00A1-75E0A31B8515}|ServerCLI\\ServerCLI.csproj|c:\\osshared\\captiveportal\\src\\servercli\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -51,51 +43,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "script.js",
-              "DocumentMoniker": "C:\\OSShared\\CaptivePortal\\src\\Core\\Pages\\script.js",
-              "RelativeDocumentMoniker": "Core\\Pages\\script.js",
-              "ToolTip": "C:\\OSShared\\CaptivePortal\\src\\Core\\Pages\\script.js",
-              "RelativeToolTip": "Core\\Pages\\script.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-12-12T05:12:03.263Z",
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\OSShared\\CaptivePortal\\src\\Core\\Pages\\index.html",
+              "RelativeDocumentMoniker": "Core\\Pages\\index.html",
+              "ToolTip": "C:\\OSShared\\CaptivePortal\\src\\Core\\Pages\\index.html",
+              "RelativeToolTip": "Core\\Pages\\index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-12-12T05:16:41.777Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CaptivePortalServer.cs",
-              "DocumentMoniker": "C:\\OSShared\\CaptivePortal\\src\\Core\\CaptivePortalServer.cs",
-              "RelativeDocumentMoniker": "Core\\CaptivePortalServer.cs",
-              "ToolTip": "C:\\OSShared\\CaptivePortal\\src\\Core\\CaptivePortalServer.cs",
-              "RelativeToolTip": "Core\\CaptivePortalServer.cs",
-              "ViewState": "AgIAAEoAAAAAAAAAAAAAwFsAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-12T05:09:58.996Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UserMockingRepository.cs",
-              "DocumentMoniker": "C:\\OSShared\\CaptivePortal\\src\\Infraestructure\\UserMockingRepository.cs",
-              "RelativeDocumentMoniker": "Infraestructure\\UserMockingRepository.cs",
-              "ToolTip": "C:\\OSShared\\CaptivePortal\\src\\Infraestructure\\UserMockingRepository.cs",
-              "RelativeToolTip": "Infraestructure\\UserMockingRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-12T05:09:50.13Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\OSShared\\CaptivePortal\\src\\ServerCLI\\Program.cs",
               "RelativeDocumentMoniker": "ServerCLI\\Program.cs",
               "ToolTip": "C:\\OSShared\\CaptivePortal\\src\\ServerCLI\\Program.cs",
               "RelativeToolTip": "ServerCLI\\Program.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAwBYAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAAAoAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-06T07:15:05.941Z",
               "EditorCaption": ""
