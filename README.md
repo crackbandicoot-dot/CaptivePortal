@@ -1,5 +1,5 @@
 # Captive Portal for Linux (C#)
-
+[Screenshot](captive_portal_screenshot.png)
 A lightweight, self-contained captive portal solution built in C# for Linux environments. This project turns a Linux machine into a Wi-Fi access point with a captive portal login page, allowing you to control internet access for connected clients.
 
 ---
