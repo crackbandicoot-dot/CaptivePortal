@@ -1,238 +1,334 @@
-# CaptivePortal
+# Captive Portal for Linux (C#)
 
-A lightweight Linux captive-portal prototype implemented in C#.
-It creates a local Wi-Fi LAN/AP environment (via `hostapd` + `dnsmasq`) and runs a custom HTTP server that serves a login page.  
-When a user logs in successfully, the server allows traffic for that client by adding `iptables` forwarding rules based on the client MAC/IP; logout removes those rules.
+A lightweight, self-contained captive portal solution built in C# for Linux environments. This project turns a Linux machine into a Wi-Fi access point with a captive portal login page, allowing you to control internet access for connected clients.
 
-## What this project currently does
+---
 
-This repository combines two parts:
+## 📋 Table of Contents
 
-1. **Network/AP setup scripts and configs** (Linux shell + `dnsmasq`/`hostapd`)
-2. **A .NET server** that serves captive portal pages and handles `/login` and `/logout`
+- [Overview](#overview)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Prerequisites](#prerequisites)
+- [Setup & Installation](#setup--installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Project Structure](#project-structure)
+- [Notes](#notes)
 
-The current implementation is a **prototype/development setup** with mock infrastructure (in-memory users, direct process calls to `arp`/`iptables`).
+---
+
+## Overview
+
+This captive portal system consists of:
+
+1. **C# HTTP Server** – Serves the login page and handles authentication logic.
+2. **Access Point (AP)** – Uses `hostapd` and `dnsmasq` to create a Wi-Fi network.
+3. **Traffic Control** – Uses `iptables` to allow/block internet access per client.
+4. **Web Interface** – A clean login/logout page served to connecting clients.
+
+When a client connects to the Wi-Fi network and tries to browse the web, they're redirected to the captive portal login page. After successful authentication, their IP/MAC is allowed through the firewall until they log out.
+
+---
 
 ## Features
 
-- Custom asynchronous TCP HTTP server (`AsyncServerBase`)
-- Captive portal endpoints:
-  - `GET /` → serves login page
-  - `GET /script.js` and `GET /style.css` → serves static assets
-  - `POST /login` → validates credentials and allows traffic
-  - `POST /logout` → blocks traffic
-- Login service abstraction (`ILoginService`) with implementation (`LoginService`)
-- User repository abstraction (`IUserRepository`) with in-memory mock (`UserMockingRepository`)
-- Internet access controller abstraction (`IInternetAccesController`) with `iptables`/`arp` implementation (`InternetAccesControllerMock`)
-- Linux helper scripts to start/stop LAN AP services
-- Basic test project scaffold (`TestProject`)
+- ✅ **Captive Portal** – Web-based authentication page
+- ✅ **Access Point Management** – Creates a Wi-Fi hotspot using `hostapd`
+- ✅ **DHCP & DNS** – Managed by `dnsmasq`
+- ✅ **Per-Client Traffic Control** – Allows/Blocks internet access using `iptables`
+- ✅ **Login/Logout** – Session management via IP address
+- ✅ **Async HTTP Server** – Built from scratch using sockets
+- ✅ **Extensible** – Easy to replace user repository or traffic controller
+- ✅ **Lightweight** – No external web server or framework required
 
-## Repository structure
-
-```text
-.
-├── configurations/
-│   ├── dnsmasq.conf        # Example dnsmasq captive-LAN config
-│   └── hospapd.conf        # Example hostapd config (filename currently misspelled)
-├── scripts/
-│   ├── get_mac.sh          # ARP-based MAC lookup helper
-│   ├── start_lan.sh        # Starts hostapd + dnsmasq, assigns AP IP, enables NAT
-│   └── stop_lan.sh         # Stops services and removes AP IP
-├── src/
-│   ├── Core/               # Domain/server logic (HTTP parser, responses, portal server, services)
-│   ├── Infraestructure/    # Infra implementations (iptables/arp controller, mock user repo)
-│   ├── ServerCLI/          # Console entrypoint that wires dependencies and starts server
-│   └── TestProject/        # MSTest project
-├── CaptivePortal.sln
-└── README.md
-```
-
-## Requirements
-
-- Linux environment (scripts use `systemctl`, `ip`, `sysctl`, `iptables`, `arp`)
-- Installed and configured:
-  - `hostapd`
-  - `dnsmasq`
-- .NET SDK supporting target framework in this repo (`net10.0` currently set in projects)
-- Sudo/root privileges for networking and firewall commands
-
-## Network configuration
-
-The committed config/scripts currently assume:
-
-- Wireless interface: `wlp1s0`
-- Captive/AP gateway IP: `192.168.4.1/24`
-- DHCP range: `192.168.4.2 - 192.168.4.100`
-- Captive DNS address mapping: `server.lan -> 192.168.4.1`
-- Server binding: `192.168.4.1:8000`
-
-### Configuration files
-
-- `configurations/dnsmasq.conf` is intended for `/etc/dnsmasq.conf`
-- `configurations/hospapd.conf` is intended for `/etc/hostapd/hostapd.conf`
-  - Note: file is named `hospapd.conf` in repo, but contents/comments indicate hostapd config.
-
-## Setup
-
-### 1) Clone the repository
-
-```bash
-git clone https://github.com/crackbandicoot-dot/CaptivePortal.git
-cd CaptivePortal
-```
-
-### 2) Install/configure system dependencies
-
-Install `hostapd`, `dnsmasq`, and ensure tools like `ip`, `iptables`, `arp`, `systemctl` are available.
-
-### 3) Copy configuration files
-
-Back up your current system configs first, then apply:
-
-```bash
-sudo cp configurations/dnsmasq.conf /etc/dnsmasq.conf
-sudo cp configurations/hospapd.conf /etc/hostapd/hostapd.conf
-```
-
-### 4) Start AP/LAN services
-
-```bash
-sudo bash scripts/start_lan.sh
-```
-
-This script currently:
-- starts `hostapd`
-- starts `dnsmasq`
-- adds `192.168.4.1/24` to `wlp1s0`
-- enables IPv4 forwarding
-- adds NAT masquerade rule
-
-## Running the server
-
-From the repository root:
-
-```bash
-dotnet run --project src/ServerCLI/ServerCLI.csproj -- --start
-```
-
-The server is started by `src/ServerCLI/Program.cs` and currently binds to:
-
-- `192.168.4.1`
-- port `8000`
-
-### Login credentials (current mock)
-
-`UserMockingRepository` is preloaded with a single user:
-
-- username: `username`
-- password: `password`
-
-## Stopping services
-
-To stop AP/LAN:
-
-```bash
-sudo bash scripts/stop_lan.sh
-```
-
-This stops `hostapd` + `dnsmasq` and removes `192.168.4.1/24` from `wlp1s0`.
+---
 
 ## Architecture
 
-### Layer / component view
-
 ```mermaid
-graph TD
-    A[ServerCLI/Program.cs] --> B[Core/CaptivePortalServer]
-    B --> C[Core/Services/Interfaces/ILoginService]
-    C --> D[Core/Services/Implementations/LoginService]
-    D --> E[Core/Interfaces/IUserRepository]
-    D --> F[Core/Interfaces/IInternetAccesController]
-    E --> G[Infraestructure/UserMockingRepository]
-    F --> H[Infraestructure/InternetAccesControllerMock]
+flowchart TB
+    subgraph Client["Client Device"]
+        Browser[Web Browser]
+    end
 
-    B --> I[Core/Pages/index.html]
-    B --> J[Core/Pages/script.js]
-    B --> K[Core/Pages/style.css]
+    subgraph Server["Linux Host (Captive Portal)"]
+        subgraph AP["Access Point Layer"]
+            Hostapd[hostapd\nWi-Fi AP]
+            Dnsmasq[dnsmasq\nDHCP + DNS]
+            IPTables[iptables\nTraffic Rules]
+        end
 
-    H --> L[arp]
-    H --> M[iptables]
+        subgraph App["C# Application"]
+            HTTPServer[Async HTTP Server\nCaptivePortalServer]
+            LoginService[LoginService]
+            UserRepo[User Repository]
+            TrafficCtrl[Internet Access Controller]
+        end
+
+        subgraph Storage["Storage"]
+            Users[(Mock/DB Users)]
+        end
+    end
+
+    Browser -->|HTTP Request| HTTPServer
+    HTTPServer -->|Serves login page| Browser
+    Browser -->|POST /login| HTTPServer
+    HTTPServer -->|Authenticate| LoginService
+    LoginService -->|Get user| UserRepo
+    UserRepo -->|Read| Users
+    LoginService -->|Allow/Block| TrafficCtrl
+    TrafficCtrl -->|Add/Remove iptables rules| IPTables
+
+    Client -->|Wi-Fi Connection| Hostapd
+    Hostapd -->|DHCP| Dnsmasq
+    Dnsmasq -->|Redirect to portal| Browser
 ```
 
-### Runtime request flow
+---
 
-```mermaid
-flowchart LR
-    Client[Wi-Fi Client] -->|HTTP GET /| Server[CaptivePortalServer]
-    Server -->|Serve static page| Client
-    Client -->|POST /login {username,password}| Server
-    Server --> LoginSvc[LoginService]
-    LoginSvc --> UserRepo[UserMockingRepository]
-    UserRepo --> LoginSvc
-    LoginSvc --> AccessCtl[InternetAccesControllerMock]
-    AccessCtl -->|Resolve MAC| ARP[arp -n]
-    AccessCtl -->|Allow traffic rules| IPT[iptables -A FORWARD ...]
-    Server -->|200 OK| Client
-```
-
-### Login / logout sequence
+## Request Flow (Login)
 
 ```mermaid
 sequenceDiagram
-    participant C as Client
-    participant S as CaptivePortalServer
-    participant L as LoginService
-    participant U as UserMockingRepository
-    participant I as InternetAccesControllerMock
-    participant OS as arp/iptables
+    participant Client
+    participant HTTPServer
+    participant LoginService
+    participant UserRepo
+    participant TrafficCtrl
+    participant IPTables
 
-    C->>S: POST /login { username, password }
-    S->>L: LoginAsync(username, password, ip)
-    L->>U: GetByNameAsync(username)
-    U-->>L: User
-    L->>I: AllowTraffic(ip)
-    I->>OS: arp -n <ip>
-    I->>OS: iptables -A FORWARD ...
-    S-->>C: 200 OK
-
-    C->>S: POST /logout
-    S->>L: LogoutAsync(ip)
-    L->>I: BlockTraffic(ip)
-    I->>OS: iptables -D FORWARD ...
-    S-->>C: 200 OK
+    Client->>HTTPServer: POST /login {username, password}
+    HTTPServer->>LoginService: LoginAsync(username, password, ip)
+    LoginService->>UserRepo: GetByNameAsync(username)
+    UserRepo-->>LoginService: User (or null)
+    alt Valid credentials
+        LoginService->>TrafficCtrl: AllowTraffic(ip)
+        TrafficCtrl->>IPTables: Add ACCEPT rules for MAC/IP
+        IPTables-->>TrafficCtrl: Done
+        TrafficCtrl-->>LoginService: Done
+        LoginService-->>HTTPServer: Success
+        HTTPServer-->>Client: 200 OK
+    else Invalid credentials
+        LoginService-->>HTTPServer: Exception
+        HTTPServer-->>Client: 401 Unauthorized
+    end
 ```
 
-## Important current limitations / notes
+---
 
-- `Program.cs` contains a hardcoded pages path:
-  `"/media/chris/Windows/OSShared/CaptivePortal/src/Core/Pages"`
-  - You will likely need to change this path for your machine.
-- Interface/config values are hardcoded (e.g., `wlp1s0`, `192.168.4.1`).
-- Error handling and HTTP parsing are minimal (prototype-level).
-- User storage is in-memory mock only.
-- Folder/project naming contains typos (e.g., `Infraestructure`, `hospapd`, `Acces`).
+## Prerequisites
 
-## Scripts summary
+- **Linux distribution** (tested on Debian/Ubuntu-based systems)
+- **.NET SDK 7.0+** (for building the C# application)
+- **Wireless adapter** that supports AP mode (e.g., `wlp1s0`)
+- **Root/sudo privileges** (for managing network interfaces and iptables)
 
-- `scripts/start_lan.sh`  
-  Bring up AP-side networking and NAT forwarding.
-
-- `scripts/stop_lan.sh`  
-  Tear down AP-side services and IP assignment.
-
-- `scripts/get_mac.sh`  
-  Reads ARP table to print a MAC for a target IP.
-
-## Development
-
-Build:
+### Required Linux Packages
 
 ```bash
-dotnet build src/src.sln
+sudo apt update
+sudo apt install -y hostapd dnsmasq iptables wireless-tools
 ```
 
-Run tests:
+---
+
+## Setup & Installation
+
+### 1. Clone or Download the Project
 
 ```bash
-dotnet test src/TestProject/TestProject.csproj
+git clone <repository-url>
+cd CaptivePortal-main
 ```
+
+### 2. Build the C# Application
+
+```bash
+dotnet build src/CaptivePortal.csproj
+```
+
+Or publish as a standalone executable:
+
+```bash
+dotnet publish src/CaptivePortal.csproj -c Release -o ./publish
+```
+
+### 3. Configure the Access Point
+
+The project includes configuration files for `hostapd` and `dnsmasq`.
+
+#### Copy configurations (adjust paths as needed):
+
+```bash
+sudo cp configs/dnsmasq.conf /etc/dnsmasq.conf
+sudo cp configs/hostapd.conf /etc/hostapd/hostapd.conf
+```
+
+> **Note:** The scripts and configs assume the wireless interface is `wlp1s0`. If your interface is different, update all files accordingly.
+
+### 4. Prepare the Web Pages
+
+The HTML, CSS, and JS files are served from the `pages/` directory. Place them where the application can read them:
+
+```bash
+mkdir -p /var/www/captive
+cp pages/* /var/www/captive/
+```
+
+Update the `pagesDirectory` path in the server initialization accordingly.
+
+---
+
+## Usage
+
+### Starting the Captive Portal
+
+A helper script is provided to start the AP, configure routing, and launch the C# server.
+
+```bash
+# Start AP and routing
+sudo ./scripts/start_ap.sh
+
+# Run the C# server (as root for iptables access)
+sudo dotnet run --project src/CaptivePortal.csproj
+```
+
+Or if published:
+
+```bash
+sudo ./publish/CaptivePortal
+```
+
+### Stopping the Captive Portal
+
+```bash
+sudo ./scripts/stop_ap.sh
+```
+
+---
+
+## Configuration
+
+### `dnsmasq.conf` (DHCP & DNS)
+
+```ini
+interface=wlp1s0
+dhcp-range=192.168.4.2,192.168.4.100,255.255.255.0,24h
+server=8.8.8.8
+server=8.8.4.4
+address=/server.lan/192.168.4.1
+```
+
+- **DHCP range**: 192.168.4.2–100
+- **DNS**: Google Public DNS
+- **Redirect**: `server.lan` resolves to 192.168.4.1 (the AP IP)
+
+### `hostapd.conf` (Access Point)
+
+```ini
+interface=wlp1s0
+driver=nl80211
+ssid=MyAccessPoint
+hw_mode=g
+channel=7
+wpa=3
+wpa_passphrase=MyPassword
+```
+
+- **SSID**: `MyAccessPoint`
+- **Passphrase**: `MyPassword`
+- **Channel**: 7 (2.4 GHz)
+
+### C# Application
+
+- **EndPoint**: The server listens on `192.168.4.1:8000` (default).
+- **Pages Directory**: Path to the HTML/CSS/JS files.
+- **User Repository**: The `UserMockingRepository` contains a default user:
+  - Username: `username`
+  - Password: `password`
+- **Internet Access Controller**: The `InternetAccesControllerMock` uses `arp` and `iptables` to manage traffic.
+
+---
+
+## Project Structure
+
+```
+CaptivePortal-main/
+├── src/
+│   ├── Core/
+│   │   ├── AsyncHttpServerBase.cs       # Async socket server base
+│   │   ├── CaptivePortalServer.cs       # HTTP request handler
+│   │   ├── Models/
+│   │   │   ├── HttpRequest.cs
+│   │   │   ├── HttpResponse.cs
+│   │   │   ├── Request.cs
+│   │   │   └── User.cs
+│   │   ├── Services/
+│   │   │   ├── Interfaces/
+│   │   │   │   └── ILoginService.cs
+│   │   │   └── Implementations/
+│   │   │       └── LoginService.cs
+│   │   └── Interfaces/
+│   │       ├── IUserRepository.cs
+│   │       └── IInternetAccesController.cs
+│   ├── Infraestructure/
+│   │   ├── UserMockingRepository.cs
+│   │   └── InternetAccesControllerMock.cs
+│   └── Program.cs                        # Entry point
+├── pages/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+├── scripts/
+│   ├── start_ap.sh                       # Starts hostapd + dnsmasq + routing
+│   └── stop_ap.sh                        # Tears down AP and routing
+├── configs/
+│   ├── dnsmasq.conf
+│   └── hostapd.conf
+└── README.md
+```
+
+---
+
+## Notes
+
+- **Root privileges** are required because the application modifies `iptables` rules and network interfaces.
+- The `InternetAccesControllerMock` uses `arp -n <ip>` to resolve MAC addresses. This depends on the ARP cache being populated (the client must have sent some traffic).
+- The captive portal detection may require additional DNS redirection. The current setup uses `address=/server.lan/192.168.4.1` in `dnsmasq` to resolve a domain to the portal IP.
+- This is a **functional prototype**. For production, consider:
+  - Using a proper database instead of the in-memory mock repository.
+  - Implementing session management with cookies/tokens.
+  - Adding HTTPS support.
+  - Handling edge cases (e.g., ARP cache misses, client reconnects).
+
+---
+
+## Troubleshooting
+
+### Clients can't see the login page
+
+- Ensure `hostapd` and `dnsmasq` are running: `sudo systemctl status hostapd dnsmasq`
+- Check that the C# server is listening: `sudo netstat -tulpn | grep 8000`
+- Verify client IP is in the 192.168.4.0/24 range.
+
+### Login fails
+
+- Check server logs for exceptions.
+- Verify the user exists in `UserMockingRepository`.
+- Ensure `iptables` rules are being applied: `sudo iptables -L FORWARD -v`
+
+### ARP cache issues
+
+- Run `arp -n` on the server to see if the client's MAC is resolved.
+- You can manually ping the client: `ping 192.168.4.x` to populate ARP.
+
+---
+
+## License
+
+This project is provided as-is. Feel free to modify and distribute as needed.
+
+---
+
+**Happy Hacking!** 🚀
